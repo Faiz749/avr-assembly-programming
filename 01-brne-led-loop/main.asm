@@ -1,0 +1,30 @@
+.include "m32def.inc"
+.org 0x00
+
+Main: 
+    LDI R16,0xFF
+	OUT DDRB,R16
+	LDI R18,0xFF
+L_1:
+    LDI R17,0xFF
+L_2:
+   LDI R16,0xFF
+   OUT PORTB,R16
+   DEC R17
+   BRNE L_2
+   DEC R18
+   BRNE L_1
+
+   LDI R18,0xFF
+L_3:
+    LDI R17,0xFF
+L_4: 
+    LDI R16,0x00
+	OUT PORTB,R16
+	DEC R17
+	BRNE L_4
+	DEC R18
+	BRNE L_3
+	JMP L_1
+	
+ 
