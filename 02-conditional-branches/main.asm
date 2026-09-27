@@ -1,0 +1,21 @@
+.include "m32def.inc"
+.org 0x00
+MAIN:
+    LDI R16,25
+	CPI R16,31
+	BRSH HIGHER
+	CPI R16,20
+	BRSH NORMAL
+LOWER:
+      LDI R16,12
+	  RJMP STOP
+
+NORMAL: 
+       LDI R16,16
+	   RJMP STOP
+
+HIGHER: 
+       LDI R16,20
+	   RJMP STOP
+STOP:
+     RJMP STOP 
