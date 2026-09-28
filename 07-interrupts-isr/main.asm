@@ -1,0 +1,31 @@
+.include "m32def.inc"
+.org 0x00
+
+    RJMP MAIN
+
+.org INT0addr
+    RJMP INT0_ISR
+
+MAIN:
+    LDI R16,0x0F
+    OUT DDRA,R16
+
+    CBI DDRD,2
+    SBI PORTD,2
+
+    SBI MCUCR,ISC01
+    CBI MCUCR,ISC00
+
+    SBI GICR,INT0
+
+    SEI
+
+LOOP:
+    RJMP LOOP
+
+INT0_ISR:
+    LDI R16,0x0F
+    IN R17,PORTA
+    EOR R17,R16
+    OUT PORTA,R17
+    RETI
